@@ -1,0 +1,146 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-book-open"></i> Learning Resources
+            </h1>
+            <p class="lead text-muted">Explore comprehensive aviation learning materials and courses</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list"></i> Available Resources
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-4" th:each="resource : ${resources}">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${resource.title}">Intro to Aerodynamics</h5>
+                                    <p class="card-text text-muted" th:text="${resource.description}">Basic flight principles</p>
+                                    <div class="mb-3">
+                                        <span class="badge bg-info me-2" th:text="${resource.category}">Theory</span>
+                                        <span class="badge bg-secondary" th:text="${resource.resourceType}">Article</span>
+                                    </div>
+                                    <a th:href="${resource.url}" target="_blank" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-external-link-alt"></i> Access Resource
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Courses Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-star"></i> Featured Courses
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card border-primary">
+                                <div class="card-header bg-primary text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-graduation-cap"></i> Aviation Fundamentals
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Comprehensive introduction to aviation principles, aircraft systems, and flight operations.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-success">Beginner</span>
+                                        <span class="text-muted">4 hours</span>
+                                    </div>
+                                    <hr>
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar" role="progressbar" style="width: 0%">0% Complete</div>
+                                    </div>
+                                    <button class="btn btn-outline-primary btn-sm w-100">Start Course</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="card border-success">
+                                <div class="card-header bg-success text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-plane"></i> Aircraft Recognition
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Learn to identify different aircraft types, manufacturers, and their unique characteristics.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-warning">Intermediate</span>
+                                        <span class="text-muted">3 hours</span>
+                                    </div>
+                                    <hr>
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%">25% Complete</div>
+                                    </div>
+                                    <button class="btn btn-outline-success btn-sm w-100">Continue Course</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Path -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-route"></i> Learning Path
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <div class="border rounded p-3 mb-3">
+                                <i class="fas fa-circle text-success fa-2x mb-2"></i>
+                                <h6>Step 1</h6>
+                                <p class="small">Aviation Basics</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="border rounded p-3 mb-3">
+                                <i class="fas fa-circle text-primary fa-2x mb-2"></i>
+                                <h6>Step 2</h6>
+                                <p class="small">Aircraft Systems</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="border rounded p-3 mb-3">
+                                <i class="fas fa-circle text-muted fa-2x mb-2"></i>
+                                <h6>Step 3</h6>
+                                <p class="small">Flight Operations</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="border rounded p-3 mb-3">
+                                <i class="fas fa-circle text-muted fa-2x mb-2"></i>
+                                <h6>Step 4</h6>
+                                <p class="small">Advanced Topics</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

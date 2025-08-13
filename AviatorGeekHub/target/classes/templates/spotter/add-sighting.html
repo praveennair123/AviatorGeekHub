@@ -1,0 +1,106 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-plus"></i> Add New Sighting
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-edit"></i> Sighting Details
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/spotter/sightings/add}" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="aircraft" class="form-label">Aircraft</label>
+                                <input type="text" class="form-control" id="aircraft" name="aircraft" 
+                                       placeholder="e.g., Boeing 737, Airbus A380" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="location" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="location" name="location" 
+                                       placeholder="e.g., Mumbai Airport, Delhi Terminal 3" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="3" 
+                                      placeholder="Describe what you saw, any special markings, etc..."></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Photo (Optional)</label>
+                            <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                            <div class="form-text">Upload a photo of the aircraft (JPG, PNG, GIF)</div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="/spotter/sightings" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Sightings
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Submit Sighting
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle"></i> Tips for Good Sightings
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Include aircraft registration if visible
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Note any special liveries or markings
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Provide accurate location details
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Upload clear, well-lit photos
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Include date and time if possible
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-camera"></i> Photo Guidelines
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <strong>Best Practices:</strong>
+                        <ul class="mb-0 mt-2">
+                            <li>Use good lighting</li>
+                            <li>Keep camera steady</li>
+                            <li>Include aircraft registration</li>
+                            <li>Max file size: 10MB</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-question-circle"></i> Aviation Quiz
+            </h1>
+            <p class="lead text-muted">Test your aviation knowledge with interactive quizzes</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-edit"></i> Quiz Questions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/student/quiz/submit}" method="post">
+                        <div th:each="quiz, iterStat : ${quizzes}" class="mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        Question <span th:text="${iterStat.count}">1</span>
+                                    </h6>
+                                    <p class="card-text" th:text="${quiz.question}">What does ATC stand for?</p>
+                                    
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" th:name="'answers[' + ${iterStat.index} + ']'" 
+                                               th:value="A" th:id="'q' + ${iterStat.count} + 'a'">
+                                        <label class="form-check-label" th:for="'q' + ${iterStat.count} + 'a'" th:text="${quiz.optionA}">
+                                            Air Traffic Control
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" th:name="'answers[' + ${iterStat.index} + ']'" 
+                                               th:value="B" th:id="'q' + ${iterStat.count} + 'b'">
+                                        <label class="form-check-label" th:for="'q' + ${iterStat.count} + 'b'" th:text="${quiz.optionB}">
+                                            Air Transport Commission
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio" th:name="'answers[' + ${iterStat.index} + ']'" 
+                                               th:value="C" th:id="'q' + ${iterStat.count} + 'c'">
+                                        <label class="form-check-label" th:for="'q' + ${iterStat.count} + 'c'" th:text="${quiz.optionC}">
+                                            Aircraft Technical Checklist
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="mt-2">
+                                        <span class="badge bg-info" th:text="${quiz.category}">Theory</span>
+                                        <span class="badge bg-secondary" th:text="${quiz.difficulty}">Easy</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane"></i> Submit Quiz
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle"></i> Quiz Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center mb-3">
+                        <div class="col-6">
+                            <h4 class="text-primary" th:text="${quizzes.size()}">5</h4>
+                            <small class="text-muted">Questions</small>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-success">10 min</h4>
+                            <small class="text-muted">Time Limit</small>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h6>Quiz Categories:</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-plane text-primary"></i> Aircraft Recognition
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-book text-success"></i> Aviation Theory
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-tools text-warning"></i> Aircraft Systems
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-map text-info"></i> Navigation
+                        </li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Tip:</strong> Read each question carefully and review your answers before submitting.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-trophy"></i> Your Progress
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <h3 class="text-success">85%</h3>
+                        <p class="text-muted">Average Score</p>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%"></div>
+                        </div>
+                        <small class="text-muted">17 out of 20 quizzes completed</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

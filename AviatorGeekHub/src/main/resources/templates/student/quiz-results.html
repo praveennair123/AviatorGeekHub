@@ -1,0 +1,152 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-chart-bar"></i> Quiz Results
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-trophy"></i> Your Performance
+                    </h5>
+                </div>
+                <div class="card-body text-center">
+                    <div class="mb-4">
+                        <div class="display-4" th:classappend="${score >= 80 ? 'text-success' : score >= 60 ? 'text-warning' : 'text-danger'}" 
+                             th:text="${score} + '%'">85%</div>
+                        <p class="lead" th:text="${score >= 80 ? 'Excellent! Great job!' : score >= 60 ? 'Good work! Keep practicing!' : 'Keep studying! You can do better!'}">
+                            Excellent! Great job!
+                        </p>
+                    </div>
+                    
+                    <div class="row text-center mb-4">
+                        <div class="col-md-4">
+                            <h4 class="text-primary" th:text="${totalQuestions}">5</h4>
+                            <small class="text-muted">Total Questions</small>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-success" th:text="${correctAnswers}">4</h4>
+                            <small class="text-muted">Correct Answers</small>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-danger" th:text="${totalQuestions - correctAnswers}">1</h4>
+                            <small class="text-muted">Incorrect Answers</small>
+                        </div>
+                    </div>
+                    
+                    <div class="progress mb-4" style="height: 30px;">
+                        <div class="progress-bar" th:classappend="${score >= 80 ? 'bg-success' : score >= 60 ? 'bg-warning' : 'bg-danger'}" 
+                             th:style="'width: ' + ${score} + '%'" role="progressbar" 
+                             th:aria-valuenow="${score}" aria-valuemin="0" aria-valuemax="100">
+                            <span th:text="${score} + '%'">85%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="/student/quiz" class="btn btn-primary">
+                            <i class="fas fa-redo"></i> Take Another Quiz
+                        </a>
+                        <a href="/student/resources" class="btn btn-outline-primary">
+                            <i class="fas fa-book"></i> Study Resources
+                        </a>
+                        <a href="/student/dashboard" class="btn btn-outline-secondary">
+                            <i class="fas fa-home"></i> Back to Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-medal"></i> Achievement Unlocked!
+                    </h5>
+                </div>
+                <div class="card-body text-center">
+                    <div th:if="${score >= 90}">
+                        <i class="fas fa-crown text-warning fa-3x mb-3"></i>
+                        <h6>Quiz Master</h6>
+                        <small class="text-muted">Outstanding performance!</small>
+                    </div>
+                    <div th:if="${score >= 80 && score < 90}">
+                        <i class="fas fa-star text-success fa-3x mb-3"></i>
+                        <h6>Aviation Expert</h6>
+                        <small class="text-muted">Excellent knowledge!</small>
+                    </div>
+                    <div th:if="${score >= 60 && score < 80}">
+                        <i class="fas fa-certificate text-primary fa-3x mb-3"></i>
+                        <h6>Knowledge Seeker</h6>
+                        <small class="text-muted">Good progress!</small>
+                    </div>
+                    <div th:if="${score < 60}">
+                        <i class="fas fa-lightbulb text-warning fa-3x mb-3"></i>
+                        <h6>Learning Explorer</h6>
+                        <small class="text-muted">Keep studying!</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-line"></i> Your Progress
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h5 class="text-primary">17</h5>
+                            <small class="text-muted">Quizzes Taken</small>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="text-success">85%</h5>
+                            <small class="text-muted">Average Score</small>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h5 class="text-info">5</h5>
+                            <small class="text-muted">Categories</small>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="text-warning">12h</h5>
+                            <small class="text-muted">Study Time</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-lightbulb"></i> Study Tips
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Review missed questions
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Practice regularly
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Read learning resources
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Take notes while studying
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

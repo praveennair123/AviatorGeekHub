@@ -1,0 +1,194 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-graduation-cap"></i> Student Dashboard
+            </h1>
+            <p class="lead text-muted">Welcome to your aviation learning hub</p>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-book fa-2x text-primary mb-2"></i>
+                    <h3 class="card-title" th:text="${resources.size()}">5</h3>
+                    <p class="card-text text-muted">Learning Resources</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-question-circle fa-2x text-success mb-2"></i>
+                    <h3 class="card-title" th:text="${quizzes.size()}">3</h3>
+                    <p class="card-text text-muted">Available Quizzes</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-trophy fa-2x text-warning mb-2"></i>
+                    <h3 class="card-title">85%</h3>
+                    <p class="card-text text-muted">Average Score</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-clock fa-2x text-info mb-2"></i>
+                    <h3 class="card-title">12h</h3>
+                    <p class="card-text text-muted">Study Time</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bolt"></i> Quick Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="/student/resources" class="list-group-item list-group-item-action">
+                            <i class="fas fa-book-open text-primary"></i>
+                            <span class="ms-2">Browse Learning Resources</span>
+                        </a>
+                        <a href="/student/quiz" class="list-group-item list-group-item-action">
+                            <i class="fas fa-question-circle text-success"></i>
+                            <span class="ms-2">Take a Quiz</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="fas fa-chart-line text-warning"></i>
+                            <span class="ms-2">View Progress Report</span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <i class="fas fa-certificate text-info"></i>
+                            <span class="ms-2">Earn Certificates</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-star"></i> Featured Resources
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item" th:each="resource : ${resources}" th:if="${resource.category == 'Theory'}">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1" th:text="${resource.title}">Intro to Aerodynamics</h6>
+                                <small class="text-muted">Theory</small>
+                            </div>
+                            <p class="mb-1" th:text="${resource.description}">Basic flight principles</p>
+                            <a th:href="${resource.url}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-external-link-alt"></i> Access
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-history"></i> Recent Activity
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-success"></div>
+                            <div class="timeline-content">
+                                <h6>Completed Quiz: Aircraft Recognition</h6>
+                                <p class="text-muted">Score: 90% - 2 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-primary"></div>
+                            <div class="timeline-content">
+                                <h6>Accessed Resource: ATC Basics</h6>
+                                <p class="text-muted">Learning Air Traffic Control - 1 day ago</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-warning"></div>
+                            <div class="timeline-content">
+                                <h6>Started Course: Aviation Fundamentals</h6>
+                                <p class="text-muted">Progress: 25% - 3 days ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-trophy"></i> Achievements
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <i class="fas fa-medal text-warning fa-3x"></i>
+                        <h6 class="mt-2">Aviation Enthusiast</h6>
+                        <small class="text-muted">Completed 5 quizzes</small>
+                    </div>
+                    <div class="text-center mb-3">
+                        <i class="fas fa-book text-primary fa-2x"></i>
+                        <h6 class="mt-2">Resource Explorer</h6>
+                        <small class="text-muted">Accessed 10 resources</small>
+                    </div>
+                    <div class="text-center">
+                        <i class="fas fa-clock text-success fa-2x"></i>
+                        <h6 class="mt-2">Dedicated Learner</h6>
+                        <small class="text-muted">10+ hours of study time</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .timeline-marker {
+            position: absolute;
+            left: -35px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .timeline-content {
+            padding-left: 20px;
+            border-left: 2px solid #e9ecef;
+        }
+    </style>
+</div>

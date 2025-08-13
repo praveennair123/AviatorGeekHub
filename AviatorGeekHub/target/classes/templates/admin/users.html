@@ -1,0 +1,70 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-users"></i> Manage Users
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list"></i> All Users
+                    </h5>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus"></i> Add User
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="user : ${users}">
+                                    <td th:text="${user.id}">1</td>
+                                    <td th:text="${user.username}">admin</td>
+                                    <td th:text="${user.name}">Admin User</td>
+                                    <td th:text="${user.email}">admin@aviation.com</td>
+                                    <td>
+                                        <span class="badge" th:classappend="${user.role == 'ADMIN' ? 'bg-danger' : 
+                                                                         user.role == 'PILOT' ? 'bg-primary' : 
+                                                                         user.role == 'SPOTTER' ? 'bg-warning' : 
+                                                                         user.role == 'STUDENT' ? 'bg-info' : 'bg-success'}"
+                                              th:text="${user.role}">ADMIN</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge" th:classappend="${user.enabled ? 'bg-success' : 'bg-secondary'}"
+                                              th:text="${user.enabled ? 'Active' : 'Inactive'}">Active</span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <button class="btn btn-outline-primary" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-outline-danger" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

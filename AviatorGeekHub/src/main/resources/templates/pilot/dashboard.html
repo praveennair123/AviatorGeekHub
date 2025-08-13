@@ -1,0 +1,159 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-plane"></i> Pilot Dashboard
+            </h1>
+            <p class="lead text-muted">Welcome back, <span th:text="${pilot.name}">Pilot</span>!</p>
+        </div>
+    </div>
+
+    <!-- Flight Overview -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-plane"></i> Current Flights
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Flight Number</th>
+                                    <th>Origin</th>
+                                    <th>Destination</th>
+                                    <th>Aircraft</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="flight : ${flights}">
+                                    <td>
+                                        <strong th:text="${flight.flightNumber}">AI101</strong>
+                                    </td>
+                                    <td th:text="${flight.origin}">Delhi</td>
+                                    <td th:text="${flight.destination}">New York</td>
+                                    <td th:text="${flight.aircraft}">Boeing 777</td>
+                                    <td>
+                                        <span th:class="${flight.status == 'On Time' ? 'badge bg-success' : 'badge bg-warning'}" 
+                                              th:text="${flight.status}">On Time</span>
+                                    </td>
+                                    <td>
+                                        <a href="/pilot/logbook/add" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-plus"></i> Add to Logbook
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Logbook Entries -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-book"></i> Recent Logbook Entries
+                    </h5>
+                    <a href="/pilot/logbook" class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye"></i> View All
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Aircraft</th>
+                                    <th>Duration</th>
+                                    <th>Route</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="entry : ${recentEntries}">
+                                    <td th:text="${#temporals.format(entry.flightDate, 'dd/MM/yyyy')}">15/01/2024</td>
+                                    <td th:text="${entry.aircraft}">Boeing 737</td>
+                                    <td th:text="${entry.durationHours + ' hrs'}">5.2 hrs</td>
+                                    <td>
+                                        <span th:text="${entry.origin + ' → ' + entry.destination}">Delhi → New York</span>
+                                    </td>
+                                    <td>
+                                        <span th:if="${entry.remarks}" th:text="${entry.remarks}" class="text-muted">Smooth flight</span>
+                                        <span th:unless="${entry.remarks}" class="text-muted">-</span>
+                                    </td>
+                                </tr>
+                                <tr th:if="${#lists.isEmpty(recentEntries)}">
+                                    <td colspan="5" class="text-center text-muted">
+                                        <i class="fas fa-info-circle"></i> No recent logbook entries
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-pie"></i> Flight Statistics
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h4 class="text-primary" th:text="${#lists.size(recentEntries)}">3</h4>
+                            <small class="text-muted">Recent Flights</small>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-success">16.1</h4>
+                            <small class="text-muted">Total Hours</small>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h4 class="text-info">3</h4>
+                            <small class="text-muted">Aircraft Types</small>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-warning">100%</h4>
+                            <small class="text-muted">Safety Record</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-tools"></i> Quick Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="/pilot/logbook/add" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Logbook Entry
+                        </a>
+                        <a href="/pilot/logbook" class="btn btn-outline-primary">
+                            <i class="fas fa-book"></i> View Full Logbook
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

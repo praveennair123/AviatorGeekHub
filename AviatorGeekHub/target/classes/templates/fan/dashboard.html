@@ -1,0 +1,181 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-heart"></i> Fan Flights
+            </h1>
+            <p class="lead text-muted">Track your favorite flights and stay updated with aviation news!</p>
+        </div>
+    </div>
+
+    <!-- Flight Browser -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-plane"></i> Available Flights
+                    </h5>
+                    <a href="/fan/flights" class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye"></i> View All
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3" th:each="flight : ${flights}">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h6 class="card-title" th:text="${flight.flightNumber}">AI101</h6>
+                                        <span th:class="${flight.status == 'On Time' ? 'badge bg-success' : 'badge bg-warning'}" 
+                                              th:text="${flight.status}">On Time</span>
+                                    </div>
+                                    <p class="card-text">
+                                        <i class="fas fa-map-marker-alt text-danger"></i>
+                                        <span th:text="${flight.origin}">Delhi</span>
+                                        <i class="fas fa-arrow-right mx-2 text-muted"></i>
+                                        <i class="fas fa-map-marker-alt text-success"></i>
+                                        <span th:text="${flight.destination}">New York</span>
+                                    </p>
+                                    <p class="card-text text-muted">
+                                        <i class="fas fa-plane"></i>
+                                        <span th:text="${flight.aircraft}">Boeing 777</span>
+                                    </p>
+                                    <form th:action="@{/fan/favourite}" method="post" class="d-inline">
+                                        <input type="hidden" name="flightId" th:value="${flight.id}">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-heart"></i> Add to Favourites
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Favourites -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-heart"></i> My Favourites
+                    </h5>
+                    <a href="/fan/favourites" class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye"></i> View All
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Flight</th>
+                                    <th>Route</th>
+                                    <th>Aircraft</th>
+                                    <th>Status</th>
+                                    <th>Added</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="favourite : ${favourites}">
+                                    <td>
+                                        <strong th:text="${favourite.flight.flightNumber}">AI101</strong>
+                                    </td>
+                                    <td>
+                                        <span th:text="${favourite.flight.origin + ' → ' + favourite.flight.destination}">Delhi → New York</span>
+                                    </td>
+                                    <td th:text="${favourite.flight.aircraft}">Boeing 777</td>
+                                    <td>
+                                        <span th:class="${favourite.flight.status == 'On Time' ? 'badge bg-success' : 'badge bg-warning'}" 
+                                              th:text="${favourite.flight.status}">On Time</span>
+                                    </td>
+                                    <td th:text="${#temporals.format(favourite.addedDate, 'dd/MM/yyyy')}">15/01/2024</td>
+                                    <td>
+                                        <form th:action="@{/fan/favourite/{id}/remove(id=${favourite.id})}" 
+                                              method="post" style="display: inline;">
+                                            <button type="submit" class="btn btn-sm btn-danger" 
+                                                    onclick="return confirm('Remove from favourites?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr th:if="${#lists.isEmpty(favourites)}">
+                                    <td colspan="6" class="text-center text-muted">
+                                        <i class="fas fa-heart"></i> No favourite flights yet
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-pie"></i> Flight Statistics
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h4 class="text-primary" th:text="${#lists.size(flights)}">5</h4>
+                            <small class="text-muted">Total Flights</small>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-success" th:text="${#lists.size(favourites)}">2</h4>
+                            <small class="text-muted">Favourites</small>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h4 class="text-info">3</h4>
+                            <small class="text-muted">On Time</small>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-warning">2</h4>
+                            <small class="text-muted">Delayed</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle"></i> Flight Tracking Tips
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i>
+                            <small>Add flights to favourites for quick access</small>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i>
+                            <small>Check flight status regularly</small>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i>
+                            <small>Track multiple airlines and routes</small>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i>
+                            <small>Stay updated with real-time information</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,161 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-tachometer-alt"></i> Admin Dashboard
+            </h1>
+            <p class="lead text-muted">Welcome to the AvGeek Administration Panel</p>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                    <h3 class="card-title" th:text="${totalUsers}">0</h3>
+                    <p class="card-text text-muted">Total Users</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-plane fa-2x text-success mb-2"></i>
+                    <h3 class="card-title" th:text="${totalFlights}">0</h3>
+                    <p class="card-text text-muted">Active Flights</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-clock fa-2x text-warning mb-2"></i>
+                    <h3 class="card-title" th:text="${pendingSubmissions}">0</h3>
+                    <p class="card-text text-muted">Pending Approvals</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-book fa-2x text-info mb-2"></i>
+                    <h3 class="card-title" th:text="${totalResources}">0</h3>
+                    <p class="card-text text-muted">Learning Resources</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-cogs"></i> Quick Actions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <a href="/admin/users" class="list-group-item list-group-item-action">
+                            <i class="fas fa-users text-primary"></i>
+                            <span class="ms-2">Manage Users</span>
+                        </a>
+                        <a href="/admin/flights" class="list-group-item list-group-item-action">
+                            <i class="fas fa-plane text-success"></i>
+                            <span class="ms-2">Manage Flights</span>
+                        </a>
+                        <a href="/admin/sightings" class="list-group-item list-group-item-action">
+                            <i class="fas fa-camera text-warning"></i>
+                            <span class="ms-2">Review Spotter Submissions</span>
+                        </a>
+                        <a href="/admin/resources" class="list-group-item list-group-item-action">
+                            <i class="fas fa-book text-info"></i>
+                            <span class="ms-2">Manage Learning Resources</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-bar"></i> System Overview
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <div class="border-end">
+                                <h4 class="text-primary">5</h4>
+                                <small class="text-muted">User Roles</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-success">100%</h4>
+                            <small class="text-muted">System Uptime</small>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <div class="border-end">
+                                <h4 class="text-info">H2</h4>
+                                <small class="text-muted">Database</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-warning">Spring Boot</h4>
+                            <small class="text-muted">Framework</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-history"></i> Recent Activity
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>User</th>
+                                    <th>Details</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge bg-success">Login</span></td>
+                                    <td>Admin User</td>
+                                    <td>Successfully logged into system</td>
+                                    <td>Just now</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge bg-info">View</span></td>
+                                    <td>System</td>
+                                    <td>Dashboard accessed</td>
+                                    <td>Just now</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

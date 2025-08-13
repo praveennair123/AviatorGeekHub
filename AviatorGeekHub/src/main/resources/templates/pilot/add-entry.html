@@ -1,0 +1,103 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-plus"></i> Add Logbook Entry
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-edit"></i> New Flight Entry
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/pilot/logbook/add}" method="post" th:object="${entry}">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="flightDate" class="form-label">Flight Date</label>
+                                <input type="date" class="form-control" id="flightDate" th:field="*{flightDate}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="aircraft" class="form-label">Aircraft</label>
+                                <input type="text" class="form-control" id="aircraft" th:field="*{aircraft}" 
+                                       placeholder="e.g., Boeing 737" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="flightNumber" class="form-label">Flight Number</label>
+                                <input type="text" class="form-control" id="flightNumber" th:field="*{flightNumber}" 
+                                       placeholder="e.g., AI101" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="durationHours" class="form-label">Duration (Hours)</label>
+                                <input type="number" step="0.1" class="form-control" id="durationHours" th:field="*{durationHours}" 
+                                       placeholder="e.g., 2.5" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="origin" class="form-label">Origin</label>
+                                <input type="text" class="form-control" id="origin" th:field="*{origin}" 
+                                       placeholder="e.g., Delhi" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="destination" class="form-label">Destination</label>
+                                <input type="text" class="form-control" id="destination" th:field="*{destination}" 
+                                       placeholder="e.g., Mumbai" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="remarks" class="form-label">Remarks</label>
+                            <textarea class="form-control" id="remarks" th:field="*{remarks}" rows="3" 
+                                      placeholder="Any additional notes about the flight..."></textarea>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="/pilot/logbook" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Logbook
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Save Entry
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle"></i> Tips
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Enter accurate flight times
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Include relevant remarks
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Use standard aircraft names
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check text-success"></i> Verify all information before saving
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

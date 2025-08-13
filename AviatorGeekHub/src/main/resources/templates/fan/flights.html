@@ -1,0 +1,94 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-plane"></i> Browse Flights
+            </h1>
+            <p class="lead text-muted">Explore all available flights and add your favorites</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list"></i> Available Flights
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-4" th:each="flight : ${flights}">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <h5 class="card-title" th:text="${flight.flightNumber}">AI101</h5>
+                                        <span class="badge" th:classappend="${flight.status == 'On Time' ? 'bg-success' : 
+                                                                         flight.status == 'Delayed' ? 'bg-warning' : 'bg-danger'}"
+                                              th:text="${flight.status}">On Time</span>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-plane-departure text-primary me-2"></i>
+                                            <span th:text="${flight.origin}">Delhi</span>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-plane-arrival text-success me-2"></i>
+                                            <span th:text="${flight.destination}">New York</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <small class="text-muted">
+                                            <i class="fas fa-plane me-1"></i>
+                                            <span th:text="${flight.aircraft}">Boeing 777</span>
+                                        </small>
+                                    </div>
+                                    
+                                    <form th:action="@{/fan/favourite}" method="post" class="d-inline">
+                                        <input type="hidden" name="flightId" th:value="${flight.id}">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-heart"></i> Add to Favorites
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flight Statistics -->
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-plane fa-2x text-primary mb-2"></i>
+                    <h4 class="card-title" th:text="${flights.size()}">5</h4>
+                    <p class="card-text text-muted">Total Flights</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-clock fa-2x text-success mb-2"></i>
+                    <h4 class="card-title" th:text="${flights.stream().filter(f -> f.status == 'On Time').count()}">3</h4>
+                    <p class="card-text text-muted">On Time</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-exclamation-triangle fa-2x text-warning mb-2"></i>
+                    <h4 class="card-title" th:text="${flights.stream().filter(f -> f.status == 'Delayed').count()}">2</h4>
+                    <p class="card-text text-muted">Delayed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

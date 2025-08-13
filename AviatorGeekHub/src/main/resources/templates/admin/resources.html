@@ -1,0 +1,67 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-book"></i> Manage Resources
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list"></i> Learning Resources
+                    </h5>
+                    <button class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus"></i> Add Resource
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>URL</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="resource : ${resources}">
+                                    <td th:text="${resource.title}">Intro to Aerodynamics</td>
+                                    <td>
+                                        <span class="badge bg-info" th:text="${resource.category}">Theory</span>
+                                    </td>
+                                    <td th:text="${resource.resourceType}">Article</td>
+                                    <td th:text="${resource.description}">Basic flight principles</td>
+                                    <td>
+                                        <a th:href="${resource.url}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-external-link-alt"></i> View
+                                        </a>
+                                    </td>
+                                    <td th:text="${#temporals.format(resource.createdDate, 'dd/MM/yyyy')}">15/01/2024</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <button class="btn btn-outline-primary" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-outline-danger" title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div th:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">
+                <i class="fas fa-camera"></i> Manage Sightings
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list"></i> Spotter Submissions
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Spotter</th>
+                                    <th>Aircraft</th>
+                                    <th>Location</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="submission : ${submissions}">
+                                    <td th:text="${submission.id}">1</td>
+                                    <td th:text="${submission.spotter.name}">John Spotter</td>
+                                    <td th:text="${submission.aircraft}">Airbus A380</td>
+                                    <td th:text="${submission.location}">Mumbai Airport</td>
+                                    <td th:text="${submission.description}">Spotted at Mumbai</td>
+                                    <td>
+                                        <span class="badge" th:classappend="${submission.approved ? 'bg-success' : 'bg-warning'}"
+                                              th:text="${submission.approved ? 'Approved' : 'Pending'}">Pending</span>
+                                    </td>
+                                    <td th:text="${#temporals.format(submission.submissionDate, 'dd/MM/yyyy')}">15/01/2024</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" th:if="${!submission.approved}">
+                                            <form th:action="@{/admin/sightings/{id}/approve(id=${submission.id})}" method="post" class="d-inline">
+                                                <button type="submit" class="btn btn-outline-success" title="Approve">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            </form>
+                                            <form th:action="@{/admin/sightings/{id}/reject(id=${submission.id})}" method="post" class="d-inline">
+                                                <button type="submit" class="btn btn-outline-danger" title="Reject">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <span class="text-muted" th:if="${submission.approved}">Approved</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
